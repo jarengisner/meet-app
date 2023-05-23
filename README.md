@@ -2,7 +2,7 @@
 
 ## Summary
 
-The meet application will be a full-stack application using React for the front end, and AWS lambda serverless functions for the back-end. The application will display meet-up events across multiple cities, witha user being able to search for specific cities or events. The data for events in cities will be presented in cards, as well as with data visualization graphs, and charts.
+The meet application will be a full-stack application using React for the front end, and AWS lambda serverless functions for the back-end. The application will display meet-up events across multiple cities, with a user being able to search for specific cities or events. The data for events in cities will be presented in cards, as well as with data visualization graphs, and charts.
 
 ## Technology
 

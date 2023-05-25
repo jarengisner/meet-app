@@ -44,3 +44,9 @@ Feature 4: Data Visualization
 As a user, I should be able to view some form of data visualization, representing the number of events in any given city, so that I can see popular cities for meetups, and view the data in a different way.
 
 Given that the user is viewing a city and that city’s events, when the user wants to access the data in a visual format, then they will be presented with a chart, showing data for meets across multiple different cities.
+
+## How this application will use Serverless
+
+This application will use Serverless functions to authorize users for our external Google Calendar API. We will use AWS Lambda to give access tokens to the user granting them access to the API and allowing them to view events that are programmed into our Google Calendar.
+
+![Image showing simple architecure for the application]('img/meet-architecture.png')

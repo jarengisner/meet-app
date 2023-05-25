@@ -49,4 +49,4 @@ Given that the user is viewing a city and that city’s events, when the user wa
 
 This application will use Serverless functions to authorize users for our external Google Calendar API. We will use AWS Lambda to give access tokens to the user granting them access to the API and allowing them to view events that are programmed into our Google Calendar.
 
-![Image showing simple architecure for the application]('img/meet-architecture.png')
+![Image showing simple architecure for the application](img/meet-architecture.png)

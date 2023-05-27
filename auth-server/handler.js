@@ -107,3 +107,61 @@ module.exports.getAccessToken = async (event) => {
       };
     });
 };
+
+module.exports.getCalendarEvents = async (event) => {
+  //creates a new 0auth instance which includes our env variables that we created for google, and our redirect to our actual page//
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+  //pulls the access_token that was sent from our path into a variable//
+  const access_token = decodeURIComponent(
+    `${event.pathParameters.access_token}`
+  );
+  //sets that same variable as the credentials of our 0auth//
+  oAuth2Client.setCredentials({ access_token });
+  //returns a new promise from the getCalendarEvents function//
+  return (
+    new Promise((resolve, reject) => {
+      //calendar.events.list also returns a promise//
+      //pulls the specific calendar to load from our environment variables//
+      calendar.events.list(
+        {
+          calendarId: calendar_id,
+          auth: oAuth2Client,
+          timeMin: new Date().toISOString(),
+          singleEvents: true,
+          orderBy: 'startTime',
+        },
+        (error, response) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(response);
+          }
+        }
+      );
+    })
+      //when the promise from listing our events is resolved our .then is executed//
+      .then((results) => {
+        return {
+          statusCode: 200,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': true,
+          },
+          body: JSON.stringify({ events: results.data.items }),
+        };
+      })
+      //if we were to reject, we would get the following error handler//
+      .catch((err) => {
+        // Handle error
+        console.error(err);
+        return {
+          statusCode: 500,
+          body: JSON.stringify(err),
+        };
+      })
+  );
+};

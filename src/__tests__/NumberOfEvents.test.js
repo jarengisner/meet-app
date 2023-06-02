@@ -19,5 +19,3 @@ describe('<NumberOfEvents /> component', () => {
     expect(numberOfEventsWrapper.state('num')).toBe(20);
   });
 });
-
-//having trouble don't know what to do jesus fucking christ//

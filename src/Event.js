@@ -10,7 +10,7 @@ class Event extends Component {
   render() {
     const handleHidden = () => {
       this.setState({
-        hidden: true,
+        hidden: false,
       });
     };
 

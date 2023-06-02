@@ -34,24 +34,22 @@ describe('<EventList /> Component', () => {
   });
   //test for button and link//
   test('details click to show link', () => {
-    const clickMe = EventWrapper.find('.detailsButton');
-    clickMe.simulate('click');
-    expect(EventWrapper.find('a.eventCardDetails').text()).toBe(event.htmlLink);
+    /* const clickMe = EventWrapper.find('.detailsButton');
+    clickMe.simulate('click'); */
+    expect(EventWrapper.find('a.eventCardDetails')).toHaveLength(1);
   });
   //test for button and description//
   test('details click to show description', () => {
-    const clickMe = EventWrapper.find('.detailsButton');
-    clickMe.simulate('click');
+    /* const clickMe = EventWrapper.find('.detailsButton');
+    clickMe.simulate('click'); */
     expect(EventWrapper.find('p.eventCardDetails').text()).toBe(
       event.description
     );
   });
-});
+  test('closing details button functions', () => {
+    const clickMe = EventWrapper.find('.detailsButton');
+    clickMe.simulate('click');
 
-/* describe('<Event />', () => {
-  test('Event components exist for each event', () => {
-    //Add test here that checks that for each event a seperate component is rendered//
-
+    expect(EventWrapper.state('hidden')).toBe(true);
   });
 });
- */

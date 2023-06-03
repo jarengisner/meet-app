@@ -17,11 +17,13 @@ class CitySearch extends Component {
       suggestions,
     });
   };
-
+  //calls the updateEvents function from our props after setting the state to our new suggestion//
   handleItemClicked = (suggestion) => {
     this.setState({
       query: suggestion,
     });
+
+    this.props.updateEvents(suggestion);
   };
 
   render() {
@@ -42,7 +44,7 @@ class CitySearch extends Component {
               {suggestion}
             </li>
           ))}
-          <li>
+          <li onClick={() => this.handleItemClicked('All')}>
             <b>See all cities</b>
           </li>
         </ul>

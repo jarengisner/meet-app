@@ -1,7 +1,6 @@
 // src/Event.js
 
 import React, { Component } from 'react';
-import './event-card.styles.css';
 
 class Event extends Component {
   state = {
@@ -36,13 +35,11 @@ class Event extends Component {
         <h1 className='eventCardTitle'>{this.props.event.summary}</h1>
         <p className='eventCardStartTime'>{this.props.event.start.dateTime}</p>
         <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
-        <h2 className='eventCardDetails hidden'>About this Event</h2>
-        <a href={this.props.event.htmlLink} className='eventCardDetails hidden'>
+        <h2 className='eventCardDetails'>About this Event</h2>
+        <a href={this.props.event.htmlLink} className='eventCardDetails'>
           Click to view in Google Calendar
         </a>
-        <p className='eventCardDetails hidden'>
-          {this.props.event.description}
-        </p>
+        <p className='eventCardDetails'>{this.props.event.description}</p>
         <button onClick={closeHandler} className='detailsButton'>
           Close Details
         </button>

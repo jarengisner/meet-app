@@ -3,19 +3,25 @@ import axios from 'axios';
 import './nprogress.css';
 import NProgress from 'nprogress';
 
-/**
- *
- * @param {*} events:
- * The following function should be in the “api.js” file.
- * This function takes an events array, then uses map to create a new array with only locations.
- * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
- * The Set will remove all duplicates from the array.
- */
-//extracts the location from our events and creates a new superset by events//
-export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
+//fetches our access token//
+export const getAccessToken = async () => {
+  const accessToken = localStorage.getItem('access_token');
+  const tokenCheck = accessToken && (await checkToken(accessToken));
+
+  if (!accessToken || tokenCheck.error) {
+    await localStorage.removeItem('access_token');
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = await searchParams.get('code');
+    if (!code) {
+      const results = await axios.get(
+        'https://cwolqehw5f.execute-api.us-west-2.amazonaws.com/dev/api/get-auth-url'
+      );
+      const { authUrl } = results.data;
+      return (window.location.href = authUrl);
+    }
+    return code && getToken(code);
+  }
+  return accessToken;
 };
 //checks our access token is valid//
 //if token is not valid, should be re-directed to 0auth screen since the token fails//
@@ -28,39 +34,7 @@ const checkToken = async (accessToken) => {
 
   return result;
 };
-//removes the query from the url once we are done with it//
-const removeQuery = () => {
-  if (window.history.pushState && window.location.pathname) {
-    var newurl =
-      window.location.protocol +
-      '//' +
-      window.location.host +
-      window.location.pathname;
-    window.history.pushState('', '', newurl);
-  } else {
-    newurl = window.location.protocol + '//' + window.location.host;
-    window.history.pushState('', '', newurl);
-  }
-};
-//This will send the request to our access tokn endpoint within //
-const getToken = async (code) => {
-  const encodeCode = encodeURIComponent(code);
-  const { access_token } = await fetch(
-    'https://cwolqehw5f.execute-api.us-west-2.amazonaws.com/dev/api/token' +
-      '/' +
-      encodeCode
-  )
-    .then((res) => {
-      return res.json();
-    })
-    .catch((error) => error);
 
-  access_token && localStorage.setItem('access_token', access_token);
-
-  return access_token;
-};
-
-//if we are on localhost, our mockData will be sent to us, if not, we will fetch from the api//
 export const getEvents = async () => {
   NProgress.start();
 
@@ -87,23 +61,48 @@ export const getEvents = async () => {
     return result.data.events;
   }
 };
-//fetches our access token//
-export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem('access_token');
-  const tokenCheck = accessToken && (await checkToken(accessToken));
-
-  if (!accessToken || tokenCheck.error) {
-    await localStorage.removeItem('access_token');
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get('code');
-    if (!code) {
-      const results = await axios.get(
-        'https://cwolqehw5f.execute-api.us-west-2.amazonaws.com/dev/api/get-auth-url'
-      );
-      const { authUrl } = results.data;
-      return (window.location.href = authUrl);
-    }
-    return code && getToken(code);
+//removes the query from the url once we are done with it//
+const removeQuery = () => {
+  if (window.history.pushState && window.location.pathname) {
+    var newurl =
+      window.location.protocol +
+      '//' +
+      window.location.host +
+      window.location.pathname;
+    window.history.pushState('', '', newurl);
+  } else {
+    newurl = window.location.protocol + '//' + window.location.host;
+    window.history.pushState('', '', newurl);
   }
-  return accessToken;
 };
+//This will send the request to our access tokn endpoint within //
+const getToken = async (code) => {
+  try {
+    const encodeCode = encodeURIComponent(code);
+
+    const response = await fetch(
+      'https://cwolqehw5f.execute-api.us-west-2.amazonaws.com/dev/api/token' +
+        '/' +
+        encodeCode
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const { access_token } = await response.json();
+    access_token && localStorage.setItem('access_token', access_token);
+    return access_token;
+  } catch (error) {
+    error.json();
+  }
+};
+
+//extracts the location from our events and creates a new superset by events//
+export const extractLocations = (events) => {
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
+
+//https://cwolqehw5f.execute-api.us-west-2.amazonaws.com/dev/api/token
+
+//if we are on localhost, our mockData will be sent to us, if not, we will fetch from the api//

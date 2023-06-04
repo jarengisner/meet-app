@@ -13,7 +13,7 @@ class NumberOfEvents extends Component {
         num: value,
         errTxt: '',
       });
-      //calls updateEvents with our selectedCity as well as our new value to only find x amount of events//
+
       /* this.props.updateEvents(this.props.selectedCity, value); */
       this.props.updateEvents(this.props.eventLocation, value);
     }

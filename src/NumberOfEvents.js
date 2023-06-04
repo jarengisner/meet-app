@@ -3,12 +3,28 @@ import React, { Component } from 'react';
 class NumberOfEvents extends Component {
   state = {
     num: 32,
+    errTxt: '',
+  };
+  //New handleNumChange//
+  handleNumChange = (event) => {
+    const value = event.target.value;
+    if (value >= 1 || value <= 32) {
+      this.setState({
+        num: value,
+        errTxt: '',
+      });
+      //calls updateEvents with our selectedCity as well as our new value to only find x amount of events//
+      /* this.props.updateEvents(this.props.selectedCity, value); */
+      this.props.updateEvents(this.props.eventLocation, value);
+    }
+    if (value < 1 || value > 32) {
+      this.setState({
+        num: value,
+        errTxt: 'Please enter a valid number',
+      });
+    }
   };
 
-  handleNumChange = (event) => {
-    const newNum = event.target.value;
-    this.setState({ num: newNum });
-  };
   render() {
     return (
       <div>
@@ -19,6 +35,7 @@ class NumberOfEvents extends Component {
           onChange={(event) => {
             this.handleNumChange(event);
           }}
+          placeholder='32'
         ></input>
       </div>
     );

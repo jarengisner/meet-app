@@ -22,7 +22,7 @@ class Event extends Component {
     //Check if we can use the filtered data, to make sure that once data is filtered we only see those items//
 
     return this.state.hidden === true ? (
-      <div>
+      <div className='eventContainer'>
         <h1 className='eventCardTitle'>{this.props.event.summary}</h1>
         <p className='eventCardStartTime'>{this.props.event.start.dateTime}</p>
         <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
@@ -31,11 +31,11 @@ class Event extends Component {
         </button>
       </div>
     ) : (
-      <div>
-        <h1 className='eventCardTitle'>{this.props.event.summary}</h1>
-        <p className='eventCardStartTime'>{this.props.event.start.dateTime}</p>
-        <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
-        <h2 className='eventCardDetails'>About this Event</h2>
+      <div className='eventContainer'>
+        <h1 className='event__Details'>{this.props.event.summary}</h1>
+        <p className='event__Details'>{this.props.event.start.dateTime}</p>
+        <p className='event__Details'>{this.props.event.start.timeZone}</p>
+        <h2 className='event__Details'>About this Event</h2>
         <a href={this.props.event.htmlLink} className='eventCardDetails'>
           Click to view in Google Calendar
         </a>

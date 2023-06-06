@@ -13,7 +13,7 @@ describe('<NumberOfEvents /> component', () => {
     expect(numberSelector).toBeDefined();
   });
   test('num state is 32 by default', () => {
-    expect(numberOfEventsWrapper.state()).toBe(32);
+    expect(numberOfEventsWrapper.state().num).toBe(32);
   });
   test('Changing number of events to render', () => {
     const eventObject = { target: { value: 20 } };

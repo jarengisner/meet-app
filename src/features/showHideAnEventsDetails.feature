@@ -1,9 +1,9 @@
 Feature: Showing/Hiding an events details
 
 Scenario: When the user has  not clicked the details button, the event details should be hidden.
-Given that the user has not clicked the 'See details button'
+Given that the user has not clicked the details button
 When the user opens the app
-Event details should be hidden by default
+Then Event details should be hidden by default
 
 Scenario: When the user clicks on the details button, event details are displayed.
 Given that the user has the application open

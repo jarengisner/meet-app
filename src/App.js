@@ -91,29 +91,12 @@ class App extends Component {
         }
       });
     }
+    this.updateWarningText();
   }
 
   componentWillUnmount() {
     this.mounted = false;
   }
-  /* render() {
-    return (
-      <div className='App'>
-        <CitySearch
-          updateEvents={this.updateEvents}
-          locations={this.state.locations}
-        />
-        <NumberOfEvents
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-          eventLocation={this.eventLocation}
-        />
-        <InfoAlert text={this.state.warningText} />
-        <EventList events={this.state.events} />
-      </div>
-    );
-  }
-} */
 
   render() {
     if (this.state.showWelcomeScreen === undefined)

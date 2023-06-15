@@ -50,10 +50,10 @@ class App extends Component {
     } else {
       getEvents().then((events) => {
         const locationEvents = events;
-        const visibleEvents = locationEvents.slice(
+        /* const visibleEvents = locationEvents.slice(
           0,
           this.state.numberOfEvents
-        );
+        ); */
         this.setState({
           events: locationEvents,
           numberOfEvents: this.state.numberOfEvents,

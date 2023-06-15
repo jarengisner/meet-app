@@ -25,7 +25,7 @@ export const getAccessToken = async () => {
 };
 //checks our access token is valid//
 //if token is not valid, should be re-directed to 0auth screen since the token fails//
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )

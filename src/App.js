@@ -4,6 +4,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
+import { InfoAlert } from './Alert';
 
 class App extends Component {
   state = {
@@ -11,7 +12,18 @@ class App extends Component {
     locations: [],
     numberOfEvents: 32,
     eventLocation: '',
+    warningText: '',
   };
+
+  updateWarningText = () => {
+    if (!navigator.onLine) {
+      this.setState({
+        warningText:
+          'The application is offline, you may experience trouble loading some content',
+      });
+    }
+  };
+
   updateEvents = (location, numberOfEvents) => {
     if (!numberOfEvents) {
       getEvents().then((events) => {
@@ -72,6 +84,7 @@ class App extends Component {
         });
       }
     });
+    this.updateWarningText();
   }
   z;
 
@@ -90,6 +103,7 @@ class App extends Component {
           updateEvents={this.updateEvents}
           eventLocation={this.eventLocation}
         />
+        <InfoAlert text={this.state.warningText} />
         <EventList events={this.state.events} />
       </div>
     );

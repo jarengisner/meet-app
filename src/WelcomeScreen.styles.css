@@ -16,14 +16,14 @@
   min-width: 10rem;
   margin: 6rem;
 }
-.google-btn {
+/* .google-btn {
   width: 184px;
   height: 42px;
   margin: 2rem;
   background-color: #4285f4;
   border-radius: 2px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-}
+} */
 .google-btn:hover {
   box-shadow: 0 0 6px #4285f4;
 }
@@ -54,7 +54,8 @@
   letter-spacing: 0.2px;
   font-family: 'Roboto';
   background-color: #4285f4;
-  width: 80%;
-  height: 100%;
+  border: none;
   text-align: center;
+  padding: 2px;
+  margin: 10px 8px 8px 8px;
 }

@@ -8,6 +8,14 @@ import { InfoAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
 import { checkToken } from './api';
 import { getAccessToken } from './api';
+import {
+  ScatterChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Scatter,
+} from 'recharts';
 class App extends Component {
   state = {
     events: [],
@@ -98,6 +106,19 @@ class App extends Component {
     this.mounted = false;
   }
 
+  //This is for our data charting, counts the number of events per city//
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter(
+        (event) => event.location === location
+      ).length;
+      const city = location.split(', ').shift();
+      return { city, number };
+    });
+    return data;
+  };
+
   render() {
     if (this.state.showWelcomeScreen === undefined)
       return <div className='App' />;
@@ -113,6 +134,24 @@ class App extends Component {
           eventLocation={this.eventLocation}
         />
         <InfoAlert text={this.state.warningText} />
+        <h4>Events in each city</h4>
+
+        <ScatterChart
+          width={400}
+          height={400}
+          margin={{
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20,
+          }}
+        >
+          <CartesianGrid />
+          <XAxis type='category' dataKey='city' name='city' />
+          <YAxis type='number' dataKey='number' name='number of events' />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Scatter data={this.getData()} fill='#8884d8' />
+        </ScatterChart>
         <EventList events={this.state.events} />
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}

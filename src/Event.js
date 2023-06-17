@@ -24,7 +24,9 @@ class Event extends Component {
     return this.state.hidden === true ? (
       <div className='eventContainer'>
         <h1 className='eventCardTitle'>{this.props.event.summary}</h1>
-        <p className='eventCardStartTime'>{this.props.event.start.dateTime}</p>
+        <p className='eventCardStartTime'>
+          {new Date(this.props.event.start.dateTime)}
+        </p>
         <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
         <button onClick={handleHidden} className='detailsButton'>
           See Details

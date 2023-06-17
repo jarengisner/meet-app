@@ -36,7 +36,9 @@ class Event extends Component {
         <p className='eventCardStartTime'>
           {DateHandler(this.props.event.start.dateTime)}
         </p>
-        <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
+        <p className='eventCardTimeZone'>
+          {this.props.event.start.timeZone} Time-Zone
+        </p>
         <button onClick={handleHidden} className='detailsButton'>
           See Details
         </button>
@@ -47,7 +49,9 @@ class Event extends Component {
         <p className='event__Details'>
           {DateHandler(this.props.event.start.dateTime)}
         </p>
-        <p className='event__Details'>{this.props.event.start.timeZone}</p>
+        <p className='event__Details'>
+          {this.props.event.start.timeZone}Time-Zone
+        </p>
         <h2 className='event__Details'>About this Event</h2>
         <a href={this.props.event.htmlLink} className='eventCardDetails'>
           Click to view in Google Calendar

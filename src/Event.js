@@ -1,6 +1,7 @@
 // src/Event.js
 
 import React, { Component } from 'react';
+const moment = require('moment');
 
 class Event extends Component {
   state = {
@@ -18,6 +19,14 @@ class Event extends Component {
         hidden: true,
       });
     };
+
+    const DateHandler = (day) => {
+      let currentDateString = day;
+      const formattedDateTime = moment(currentDateString).format(
+        'MM/DD/YYYY HH:mm:ss'
+      );
+      return formattedDateTime;
+    };
     //Need to add something along the lines of events.forEach produce a div etc.//
     //Check if we can use the filtered data, to make sure that once data is filtered we only see those items//
 
@@ -25,7 +34,7 @@ class Event extends Component {
       <div className='eventContainer'>
         <h1 className='eventCardTitle'>{this.props.event.summary}</h1>
         <p className='eventCardStartTime'>
-          {new Date(this.props.event.start.dateTime)}
+          {DateHandler(this.props.event.start.dateTime)}
         </p>
         <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
         <button onClick={handleHidden} className='detailsButton'>
@@ -35,7 +44,9 @@ class Event extends Component {
     ) : (
       <div className='eventContainer'>
         <h1 className='event__Details'>{this.props.event.summary}</h1>
-        <p className='event__Details'>{this.props.event.start.dateTime}</p>
+        <p className='event__Details'>
+          {DateHandler(this.props.event.start.dateTime)}
+        </p>
         <p className='event__Details'>{this.props.event.start.timeZone}</p>
         <h2 className='event__Details'>About this Event</h2>
         <a href={this.props.event.htmlLink} className='eventCardDetails'>

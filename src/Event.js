@@ -50,7 +50,7 @@ class Event extends Component {
           {DateHandler(this.props.event.start.dateTime)}
         </p>
         <p className='event__Details'>
-          {this.props.event.start.timeZone}Time-Zone
+          {this.props.event.start.timeZone} Time-Zone
         </p>
         <h2 className='event__Details'>About this Event</h2>
         <a href={this.props.event.htmlLink} className='eventCardDetails'>

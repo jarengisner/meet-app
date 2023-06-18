@@ -8,6 +8,7 @@ import { InfoAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
 import { checkToken } from './api';
 import { getAccessToken } from './api';
+import NavBarComponent from './NavBarComponent';
 import {
   ScatterChart,
   CartesianGrid,
@@ -125,6 +126,7 @@ class App extends Component {
       return <div className='App' />;
     return (
       <div className='App'>
+        <NavBarComponent />
         <CitySearch
           updateEvents={this.updateEvents}
           locations={this.state.locations}
@@ -153,12 +155,14 @@ class App extends Component {
           </ScatterChart>
         </ResponsiveContainer>
         <EventList events={this.state.events} />
-        <WelcomeScreen
-          showWelcomeScreen={this.state.showWelcomeScreen}
-          getAccessToken={() => {
-            getAccessToken();
-          }}
-        />
+        <div className='WelcomeScreenContainer'>
+          <WelcomeScreen
+            showWelcomeScreen={this.state.showWelcomeScreen}
+            getAccessToken={() => {
+              getAccessToken();
+            }}
+          />
+        </div>
       </div>
     );
   }

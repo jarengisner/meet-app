@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
-@import 'bootstrap/dist/css/bootstrap.min.css';
 .App {
   text-align: center;
+  padding: 2% 5%;
 }
 
 .App * {
@@ -129,7 +129,7 @@ input[type='number'] {
 }
 
 .Alert {
-  /* position: fixed; */
+  position: fixed;
   top: 20px;
 }
 

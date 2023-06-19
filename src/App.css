@@ -1,26 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
-
 @import 'bootstrap/dist/css/bootstrap.min.css';
-
-.container {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar {
-  width: 100vw;
-}
-
 .App {
   text-align: center;
-}
-
-.bodyContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .App * {

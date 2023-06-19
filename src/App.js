@@ -8,7 +8,6 @@ import { InfoAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
 import { checkToken } from './api';
 import { getAccessToken } from './api';
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import {
   ScatterChart,
   CartesianGrid,
@@ -27,7 +26,6 @@ class App extends Component {
     warningText: '',
     showWelcomeScreen: undefined,
   };
-
   updateWarningText = () => {
     if (!navigator.onLine) {
       this.setState({
@@ -36,7 +34,6 @@ class App extends Component {
       });
     }
   };
-
   updateEvents = (location, numberOfEvents) => {
     if (!numberOfEvents) {
       getEvents().then((events) => {
@@ -86,7 +83,6 @@ class App extends Component {
       });
     }
   };
-
   async componentDidMount() {
     this.mounted = true;
     const accessToken = localStorage.getItem('access_token');
@@ -103,11 +99,9 @@ class App extends Component {
     }
     this.updateWarningText();
   }
-
   componentWillUnmount() {
     this.mounted = false;
   }
-
   //This is for our data charting, counts the number of events per city//
   getData = () => {
     const { locations, events } = this.state;
@@ -120,82 +114,66 @@ class App extends Component {
     });
     return data;
   };
-
   render() {
     if (this.state.showWelcomeScreen === undefined)
       return <div className='App' />;
     return (
       <div className='App'>
-        <Container>
-          <Navbar expand='lg' className='bg-body-tertiary'>
-            <Container>
-              <Navbar.Brand href='#home'>React-Bootstrap</Navbar.Brand>
-              <Navbar.Toggle aria-controls='basic-navbar-nav' />
-              <Navbar.Collapse id='basic-navbar-nav'>
-                <Nav className='me-auto'>
-                  <Nav.Link href='#home'>Home</Nav.Link>
-                  <Nav.Link href='#link'>Link</Nav.Link>
-                  <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
-                    <NavDropdown.Item href='#action/3.1'>
-                      Action
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href='#action/3.2'>
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href='#action/3.3'>
-                      Something
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href='#action/3.4'>
-                      Separated link
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-          <div className='bodyContent'>
-            <CitySearch
-              updateEvents={this.updateEvents}
-              locations={this.state.locations}
-            />
-            <NumberOfEvents
-              locations={this.state.locations}
-              updateEvents={this.updateEvents}
-              eventLocation={this.eventLocation}
-            />
-            <InfoAlert text={this.state.warningText} />
-            <h4>Events in each city</h4>
-            <ResponsiveContainer height={400}>
-              <ScatterChart
-                margin={{
-                  top: 20,
-                  right: 20,
-                  bottom: 20,
-                  left: 20,
-                }}
-              >
-                <CartesianGrid />
-                <XAxis type='category' dataKey='city' name='city' />
-                <YAxis type='number' dataKey='number' name='number of events' />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={this.getData()} fill='#8884d8' />
-              </ScatterChart>
-            </ResponsiveContainer>
-            <EventList events={this.state.events} />
-          </div>
-          <div className='WelcomeScreenContainer'>
-            <WelcomeScreen
-              showWelcomeScreen={this.state.showWelcomeScreen}
-              getAccessToken={() => {
-                getAccessToken();
-              }}
-            />
-          </div>
-        </Container>
+        <CitySearch
+          updateEvents={this.updateEvents}
+          locations={this.state.locations}
+        />
+        <NumberOfEvents
+          locations={this.state.locations}
+          updateEvents={this.updateEvents}
+          eventLocation={this.eventLocation}
+        />
+        <InfoAlert text={this.state.warningText} />
+        <h4>Events in each city</h4>
+
+        <ScatterChart
+          width={400}
+          height={400}
+          margin={{
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20,
+          }}
+        >
+          <CartesianGrid />
+          <XAxis type='category' dataKey='city' name='city' />
+          <YAxis type='number' dataKey='number' name='number of events' />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Scatter data={this.getData()} fill='#8884d8' />
+        </ScatterChart>
+        <ResponsiveContainer height={400}>
+          <ScatterChart
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20,
+            }}
+          >
+            <CartesianGrid />
+            <XAxis type='category' dataKey='city' name='city' />
+            <YAxis type='number' dataKey='number' name='number of events' />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Scatter data={this.getData()} fill='#8884d8' />
+          </ScatterChart>
+        </ResponsiveContainer>
+        <EventList events={this.state.events} />
+        <div className='welcomeScreenContainer'>
+          <WelcomeScreen
+            showWelcomeScreen={this.state.showWelcomeScreen}
+            getAccessToken={() => {
+              getAccessToken();
+            }}
+          />
+        </div>
       </div>
     );
   }
 }
-
 export default App;

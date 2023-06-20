@@ -117,6 +117,7 @@ class App extends Component {
     return data;
   };
   render() {
+    /* const { locations, numberOfEvents, events } = this.state; */
     if (this.state.showWelcomeScreen === undefined)
       return <div className='App' />;
     return (
@@ -135,7 +136,7 @@ class App extends Component {
 
         {/*Error is somewhere below this line*/}
         <div className='data-vis-wrapper'>
-          <EventGenre events={events} />
+          <EventGenre events={this.state.events} className='pie-chart' />
           <ResponsiveContainer height={400}>
             <ScatterChart
               margin={{

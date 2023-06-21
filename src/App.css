@@ -1,7 +1,36 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
 .App {
   text-align: center;
   padding: 2% 5%;
+}
+
+.pageTitle {
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+  color: #379683;
+  text-decoration: underline;
+  text-decoration-color: #379683;
+}
+.eventCardTitle,
+.event__Details,
+.eventCardStartTime,
+.eventCardTimeZone {
+  font-family: Poppins, sans-serif;
+  color: #379683;
+}
+.eventContainer,
+.event {
+  background-color: #fff;
+}
+
+* {
+  font-family: Poppins, sans-serif;
+  color: #379683;
+}
+
+#root {
+  background-color: #edf5e1;
 }
 
 .App * {
@@ -38,6 +67,10 @@ input[type='number'] {
 
 .city {
   width: 250px;
+}
+
+.detailsButtonTxt {
+  color: white;
 }
 
 .CitySearch {
@@ -93,6 +126,7 @@ input[type='number'] {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
+  color: white;
 }
 
 .name {

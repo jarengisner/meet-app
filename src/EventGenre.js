@@ -46,9 +46,9 @@ const EventGenre = ({ events }) => {
             `${name} ${(percent * 100).toFixed(0)}%`
           }
         >
-          {data.map((dataEntry, indexOfEntry) => {
-            <Cell key={`cell-${indexOfEntry}`} fill={colors[indexOfEntry]} />;
-          })}
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index]} />
+          ))}
         </Pie>
       </PieChart>
     </ResponsiveContainer>

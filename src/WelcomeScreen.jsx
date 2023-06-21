@@ -24,7 +24,7 @@ o.svg'
             rel='nofollow noopener'
             class='btn-text'
           >
-            <b>Sign in with google</b>
+            <b className='welcomeBtnTxt'>Sign in with google</b>
           </button>
         </div>
       </div>

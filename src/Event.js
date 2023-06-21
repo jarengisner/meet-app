@@ -1,6 +1,7 @@
 // src/Event.js
 
 import React, { Component } from 'react';
+import './App.css';
 const moment = require('moment');
 
 class Event extends Component {
@@ -38,7 +39,7 @@ class Event extends Component {
         </p>
         <p className='eventCardTimeZone'>{this.props.event.start.timeZone}</p>
         <button onClick={handleHidden} className='detailsButton'>
-          See Details
+          <span className='detailsButtonTxt'>See Details</span>
         </button>
       </div>
     ) : (
@@ -54,7 +55,7 @@ class Event extends Component {
         </a>
         <p className='eventCardDetails'>{this.props.event.description}</p>
         <button onClick={closeHandler} className='detailsButton'>
-          Close Details
+          <span className='detailsButtonTxt'>Close Details</span>
         </button>
       </div>
     );

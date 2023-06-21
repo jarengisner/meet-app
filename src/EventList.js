@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import Event from './Event';
+import './App.css';
 
 class EventList extends Component {
   render() {

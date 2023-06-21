@@ -122,6 +122,7 @@ class App extends Component {
       return <div className='App' />;
     return (
       <div className='App'>
+        <h1 className='pageTitle'>Meet-App</h1>
         <CitySearch
           updateEvents={this.updateEvents}
           locations={this.state.locations}
@@ -132,7 +133,7 @@ class App extends Component {
           eventLocation={this.eventLocation}
         />
         <InfoAlert text={this.state.warningText} />
-        <h4>Events in each city</h4>
+        <h4 className='pageTitle'>Events in each city</h4>
 
         {/*Error is somewhere below this line*/}
         <div className='data-vis-wrapper'>
